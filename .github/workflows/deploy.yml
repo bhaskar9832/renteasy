@@ -90,6 +90,9 @@ jobs:
 
             ln -sfn "$RELEASE_DIR" $BASE_DIR/current
 
+            # Ensure PM2 is installed globally on the VPS
+            npm install -g pm2
+
             pm2 restart renteasy-backend || pm2 start $BASE_DIR/current/backend/dist/server.js --name renteasy-backend
 
             nginx -t && systemctl reload nginx || echo "Nginx not running or not configured, skipping reload"
